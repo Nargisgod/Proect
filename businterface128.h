@@ -20,9 +20,15 @@ public:
     }
     virtual void reset() override { mapper.reset(); }
 protected:
+    #if defined (WIN32)
     ROMDevice rom { "rom/128.rom" };
+#endif
+#if defined (Q_OS_ANDROID)
+    ROMDevice rom {"assets:rom/128.rom"};
+#endif
     RAMDevice ram { 17 };
     Port7FFD mapper;
 };
 
 #endif // BUSINTERFACE128_H
+
